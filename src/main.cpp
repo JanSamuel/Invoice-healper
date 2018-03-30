@@ -8,7 +8,7 @@
 using namespace std;
 int main();
 
- void help()
+void help()
 {
     cout<<"\n\nWhat this program do?\nIt corrects invoices list recalculate and save to file with name.corrected.txt also if file need to be processed again it is saved as name.not_processed.txt\nHow to run a file?\nYou need to put this program in the same folder as file you need to process,\nthen you past press enter\nREC number later called lines must be separated by comas ',' when finish close input be typing double coma ',,'\nIf You don't want any lines to be operated on you need to put comma','\neg."<<endl;
     cout<<"Lines that need to be processed by client in ****** :"<<endl;
@@ -23,7 +23,6 @@ int main();
 
     cout<<"\n\n"<<endl;
 
-    main();
 }
 
 
@@ -54,7 +53,7 @@ vector<int> reader()//reads input in to vector
 
         }
         else
-        vect.push_back(i);
+            vect.push_back(i);
     }
     cin.clear();
     cin.ignore();
@@ -99,7 +98,7 @@ bool check_H(string x)//checks if line is beginning of invoice
 }
 void check_H_correct(string x)//check if line starts with H, if not terminates aplication
 {
- if(!check_H(x))
+    if(!check_H(x))
     {
         exit();
     }
@@ -125,21 +124,21 @@ string find_inv(string str) //looks for invoice number
         return "INV"+inv+"\n";
     }
     else
-       return find_inv(str);
+        return find_inv(str);
 }
 vector<int> sort_v(vector <int> vec)//sorts and check for duplicates
 {
     if(vec.size()>0)
     {
-    std::sort (vec.begin(), vec.end());
-    for(int i=0; i<(vec.size()-1); i++)
-    {
-        if(vec[i]!=0&&vec[i]==vec[i+1])
+        std::sort (vec.begin(), vec.end());
+        for(int i=0; i<(vec.size()-1); i++)
         {
-            cout<<"Error report:Line "<<vec[i]<<" duplicated"<<endl;
-            vec.erase(vec.begin()+i);
+            if(vec[i]!=0&&vec[i]==vec[i+1])
+            {
+                cout<<"Error report:Line "<<vec[i]<<" duplicated"<<endl;
+                vec.erase(vec.begin()+i);
+            }
         }
-    }
     }
     return vec;
 }
@@ -189,7 +188,7 @@ vector<string> load(string name)//loads file into vector
 }
 void delete_lines(vector<int> n_lines, vector<string>const &tmp, string name, string header)//delete lines indicated by user
 {
-    for(int i=0; i<n_lines.size();++i)//if lines inputed by user aren't beginning of invoice terminates application
+    for(int i=0; i<n_lines.size(); ++i) //if lines inputed by user aren't beginning of invoice terminates application
     {
         check_H_correct(tmp[(n_lines[i]-1)]);
     }
@@ -251,7 +250,7 @@ int main()
     cout<<"Invoice Helper 2018 licensed under EPL license"<<endl;
     string answer;
 
-        cout<<"Hello\nWelcome to Invoice Helper\nIf it is you're first time using I encourage you to use help by writing 'help'"<<endl;
+    cout<<"Hello\nWelcome to Invoice Helper\nIf it is you're first time using I encourage you to use help by writing 'help'"<<endl;
     do
     {
         cout<<"If you want open file write/past it name without .txt at end :"<<endl;
@@ -260,6 +259,8 @@ int main()
         if(name=="help")
         {
             help();
+            cout<<"If you want open file write/past it name without .txt at end :"<<endl;
+            cin>>name;
         }
         vector<int>num_lines;
         vector<int>num_lines_2;
